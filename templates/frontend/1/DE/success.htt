@@ -1,0 +1,22 @@
+{*
+ * toolConfirmationLog
+ *
+ * @author Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>
+ * @link http://phpmanufaktur.de
+ * @copyright 2012
+ * @license MIT License (MIT) http://www.opensource.org/licenses/MIT
+ * 
+ * Please consult the Dwoo Documentation & WIKI to get further informations 
+ * and hints for the usage of the Dwoo template engine.
+ *
+ * @link http://wiki.dwoo.org/
+ *
+ * Use {dump()} to get a list of all in this template available variables!
+ *}
+{if $DEBUG == 1}
+  {$template_path}
+  {dump()}
+{/if}
+<div id="confirm">
+  <p>Die Lesebestätigung wurde gespeichert.</p>
+</div>

@@ -1,0 +1,36 @@
+{*
+ * toolConfirmationLog
+ *
+ * @author Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>
+ * @link http://phpmanufaktur.de
+ * @copyright 2012
+ * @license MIT License (MIT) http://www.opensource.org/licenses/MIT
+ *
+ * Please consult the Dwoo Documentation & WIKI to get further informations 
+ * and hints for the usage of the Dwoo template engine.
+ *
+ * @link http://wiki.dwoo.org/
+ *
+ * Use {dump()} to get a list of all in this template available variables!
+ *}
+<div class="about">
+  {if isset($img_url)}
+  <div class="about_logo">
+    <img src="{$img_url}" width="400" height="267" alt="kitForm" />
+  </div>
+  {/if}
+  <div class="about_text">
+    <h2>toolConfirmationLog</h2>
+    <p>Release {$version}</b> - &copy 2012 by phpManufaktur, Ralf Hertsch (Berlin)</p>
+    <p class="about_address"><b>phpManufaktur</b><br />Ralf Hertsch<br />Stockholmer Str. 31<br />13359 Berlin</p>
+    <p class="about_contact">
+      <a href="http://phpmanufaktur.de" target="_blank">http://phpManufaktur.de</a><br />
+      <a href="mailto:ralf.hertsch@phpmanufaktur.de">ralf.hertsch@phpManufaktur.de</a><br />
+      phone +49 (0)30 68813647
+    </p>
+    <div class="about_release">
+      <p><b>History:</b></p>
+      <pre>{$release_notes}</pre>
+    </div>
+  </div>
+</div>

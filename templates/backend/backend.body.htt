@@ -1,0 +1,33 @@
+{*
+ * toolConfirmationLog
+ *
+ * @author Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>
+ * @link http://phpmanufaktur.de
+ * @copyright 2012
+ * @license MIT License (MIT) http://www.opensource.org/licenses/MIT
+ *
+ * Please consult the Dwoo Documentation & WIKI to get further informations 
+ * and hints for the usage of the Dwoo template engine.
+ *
+ * @link http://wiki.dwoo.org/
+ *
+ * Use {dump()} to get a list of all in this template available variables!
+ *}
+<div class="log_backend">
+  <ul class="nav_tab">
+  {foreach $navigation nav}
+    {if $nav.active == 1}
+      <li class="selected"><a href="{$nav.url}">{$nav.text}</a></li>
+    {else}
+      <li><a href="{$nav.url}">{$nav.text}</a></li>
+    {/if}
+  {/foreach}
+  </ul>
+{if $error == 1}
+  <div class="error">
+{else}
+  <div>
+{/if}
+    {$content}
+  </div>
+</div>

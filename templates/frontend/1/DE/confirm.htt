@@ -1,0 +1,47 @@
+{*
+ * toolConfirmationLog
+ *
+ * @author Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>
+ * @link http://phpmanufaktur.de
+ * @copyright 2012
+ * @license MIT License (MIT) http://www.opensource.org/licenses/MIT
+ * 
+ * Please consult the Dwoo Documentation & WIKI to get further informations 
+ * and hints for the usage of the Dwoo template engine.
+ *
+ * @link http://wiki.dwoo.org/
+ *
+ * Use {dump()} to get a list of all in this template available variables!
+ *}
+{if $DEBUG == 1}
+  {$template_path}
+  {dump()}
+{/if}
+<div id="confirm">
+  <form name="{$form.name}" action="{$form.action.link}" method="post">
+    <input type="hidden" name="{$form.action.name}" value="{$form.action.value}" />
+    {if isset($form.response)}
+      {* don't remove this block, it allow the program to place responses! *}
+      <div class="message">{$form.response}</div>
+    {/if}
+    <p>Bitte bestätigen Sie, dass Sie den obigen Text gelesen haben!</p>
+    {if $fields.name.active == 1}
+    <div class="confirm_label">Ihr Name:</div>
+    <div class="confirm_input">
+      <input type="text" name="{$fields.name.name}" value="{$fields.name.value}" />
+    </div>
+    <div class="confirm_clear"></div>
+    {/if}
+    {if $fields.email.active == 1}
+    <div class="confirm_label">Ihre E-Mail Adresse:</div>
+    <div class="confirm_input">
+      <input type="text" name="{$fields.email.name}" value="{$fields.email.value}" />
+    </div>
+    <div class="confirm_clear"></div>
+    {/if}
+    <div class="confirm_label">&nbsp;</div>
+    <div class="confirm_input">
+      <input type="submit" value="Bestätigen" />
+    </div>
+  </form>
+</div>

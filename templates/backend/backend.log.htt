@@ -1,0 +1,26 @@
+{*
+ * toolConfirmationLog
+ *
+ * @author Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>
+ * @link http://phpmanufaktur.de
+ * @copyright 2012
+ * @license MIT License (MIT) http://www.opensource.org/licenses/MIT
+ *
+ * Please consult the Dwoo Documentation & WIKI to get further informations 
+ * and hints for the usage of the Dwoo template engine.
+ *
+ * @link http://wiki.dwoo.org/
+ *
+ * Use {dump()} to get a list of all in this template available variables!
+ *}
+<div class="log">
+  <h2>Confirmation Log</h2>
+  {foreach $fields field}
+  <div class="log_container">
+    <div class="log_page_title"><a href="{$field.page_url}" target="_blank">{$field.page_title}</a></div>
+    <div class="log_installation_name">{$field.installation_name}</div>
+    <div class="log_name">{$field.typed_name} - {$field.typed_email}</div>
+    <div class="log_confirmed_at">{date_format $field.confirmed_at "%d.%m.%Y - %H:%M"}</div>
+  </div>
+  {/foreach}
+</div>
