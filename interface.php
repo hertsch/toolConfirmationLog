@@ -58,7 +58,6 @@ function transmit($target_url, &$status='') {
       $status = sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $I18n->translate('Error: got no content'));
       return false;
     }
-    //$content = $result['content'];
     $content = json_decode($result['content'], true);
     if (is_array($content)) {
       // walk through the responses
@@ -80,7 +79,7 @@ function transmit($target_url, &$status='') {
       return true;
     }
     else {
-      $status = 'fehler:'.$result['content'];
+      $status = $result['content'];
       return false;
     }
   }

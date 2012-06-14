@@ -41,7 +41,6 @@ global $admin;
 
 if (!file_exists(LEPTON_PATH.'/temp/unzip/')) @mkdir(LEPTON_PATH-'/temp/unzip/');
 $result = wb_unpack_and_import(LEPTON_PATH.'/modules/'.basename(dirname(__FILE__)).'/droplets/droplet_confirmation_log.zip', LEPTON_PATH.'/temp/unzip/');
-print_r($result);
 
 $log = new dbConfirmationLog();
 if (!$log->createTable()) {

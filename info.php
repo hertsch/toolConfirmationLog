@@ -34,7 +34,7 @@ else {
 $module_directory = 'tool_confirmation_log';
 $module_name = 'toolConfirmationLog';
 $module_function = 'tool';
-$module_version = '0.10';
+$module_version = '0.11';
 $module_status = 'BETA';
 $module_platform = '2.8';
 $module_author = 'Ralf Hertsch, Berlin (Germany)';
