@@ -4,6 +4,11 @@ Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>
 https://phpmanufaktur.de
 (c) 2012 - phpManufaktur by Ralf Hertsch
 
+Release 0.13 - 2012-06-29
+
+* added precheck for cURL extension
+* changed system of transmitting and receiving data to cURL
+
 Release 0.12 - 2012-06-15
 
 * fixed a WebsiteBaker compatibility problem

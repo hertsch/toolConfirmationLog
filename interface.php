@@ -46,23 +46,14 @@ function transmit($target_url, &$status='') {
     $url = $target_url.'/modules/tool_confirmation_log/interface.php';
     $post = array(
         'action' => 'receive',
-        'data' => $data
+        'data' => json_encode($data)
         );
     $result = http_post($url, $post);
-    if (!isset($result['headers'][0]) || (false === strpos($result['headers'][0], 'OK'))) {
-      $error = (isset($result['headers'][0])) ? $result['headers'][0] : $I18n->translate('- unknown error -');
-      $status = sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $error);
-      return false;
-    }
-    if (!isset($result['content']) || empty($result['content'])) {
-      $status = sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $I18n->translate('Error: got no content'));
-      return false;
-    }
-    $content = json_decode($result['content'], true);
-    if (is_array($content)) {
+    $result  = json_decode($result, true);
+    if (is_array($result)) {
       // walk through the responses
       $count = 0;
-      foreach ($content as $log) {
+      foreach ($result as $log) {
         if (!isset($log['id']) || !isset($log['status']) || !isset($log['transmitted_at'])) {
           $status = sprintf('[%s - %s] %s', __FUNCTION__, __LINE__, $I18n->translate('Error: received data are invalid'));
           return false;
@@ -79,7 +70,7 @@ function transmit($target_url, &$status='') {
       return true;
     }
     else {
-      $status = $result['content'];
+      $status = $result;
       return false;
     }
   }
@@ -92,27 +83,30 @@ function transmit($target_url, &$status='') {
 
 function http_post($url, $data) {
   $data_url = http_build_query ($data);
-  $data_len = strlen ($data_url);
-
-  return array ('content' => @file_get_contents(
-      $url, false, stream_context_create (array (
-          'http' => array(
-              'method' => 'POST',
-              'header' => "Connection: close\r\nContent-Length: $data_len\r\n",
-              'content'=>$data_url)
-          ))
-      ),
-      'headers' => $http_response_header
-  );
+  $command = $url.'?'.$data_url;
+  $ch = curl_init();
+  $options = array(
+      CURLOPT_SSL_VERIFYPEER => false,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_USERAGENT => 'toolConfirmationLog',
+      CURLOPT_URL => $command,
+      CURLOPT_POST => true
+      );
+  curl_setopt_array($ch, $options);
+  $result = curl_exec($ch);
+  $status = curl_getinfo($ch);
+  curl_close($ch);
+  return $result;
 } // http_post()
 
 function receive() {
   global $database;
   if (isset($_REQUEST['data'])) {
-    if (is_array($_REQUEST['data'])) {
+    $data = json_decode($_REQUEST['data'], true);
+    if (is_array($data)) {
       $received = array();
       $transmitted_at = date('Y-m-d H:i:s');
-      foreach ($_REQUEST['data'] as $log) {
+      foreach ($data as $log) {
         $set = '';
         foreach ($log as $key => $value) {
           if (($key == 'id') || ($key == 'timestamp')) continue;
