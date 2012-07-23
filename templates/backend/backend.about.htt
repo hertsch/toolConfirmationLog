@@ -29,8 +29,11 @@
       phone +49 (0)30 68813647
     </p>
     <div class="about_release">
-      <p><b>History:</b></p>
-      <pre>{$release_notes}</pre>
+      {if $release.use_markdown}
+        {$release.notes}
+      {else}
+        <pre>{$release.notes}</pre>
+      {/if}
     </div>
   </div>
 </div>

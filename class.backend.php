@@ -277,10 +277,21 @@ class confirmationBackend {
    * @return string dialog
    */
   protected function dlgAbout() {
+    $notes = file_get_contents(LEPTON_PATH . '/modules/' . basename(dirname(__FILE__)) . '/CHANGELOG');
+    $use_markdown = 0;
+    if (file_exists(LEPTON_PATH.'/modules/lib_markdown/standard/markdown.php')) {
+      require_once LEPTON_PATH.'/modules/lib_markdown/standard/markdown.php';
+      $notes = Markdown($notes);
+      $use_markdown = 1;
+    }
     $data = array(
         'version' => sprintf('%01.2f', $this->getVersion()),
         //'img_url' => $this->img_url . '/kit_form_logo_400_267.jpg',
-        'release_notes' => file_get_contents(LEPTON_PATH . '/modules/' . basename(dirname(__FILE__)) . '/CHANGELOG')
+        'release' => array(
+            'number' => $this->getVersion(),
+            'notes' => $notes,
+            'use_markdown' => $use_markdown
+            )
     );
     return $this->getTemplate('backend.about.htt', $data);
   } // dlgAbout()
